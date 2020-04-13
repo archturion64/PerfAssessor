@@ -7,6 +7,7 @@ In the process I wanted to explore some of C#'s more used containers and their p
 
 
 Example usage:	
+
 	Enter a number for your choice of action: 
 	0: Back
 	1: Hashset<Tuple>
