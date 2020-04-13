@@ -14,7 +14,6 @@ namespace CompletionTimeBenchmark
         {
             var container = new HashSet<Tuple<string, double>>();
             
-            // () => DoBenchmark(containerSize)
             for (uint i = 0; i < size; i++)
             {
                 container.Add(new Tuple<string, double>(i.ToString(), rng.NextDouble()));
@@ -26,7 +25,6 @@ namespace CompletionTimeBenchmark
         {
             var container = new HashSet<ValueTuple<string, double>>();
             
-            // () => DoBenchmark(containerSize)
             for (uint i = 0; i < size; i++)
             {
                 container.Add(new ValueTuple<string, double>(i.ToString(), rng.NextDouble()));
@@ -39,6 +37,14 @@ namespace CompletionTimeBenchmark
             return CTBenchmark.RunBenchmark(() => {
                 double cnt = 0;
                 cnt += GenerateHashSetTuple(size).Sum(x => x.Item2);
+            });
+        }
+
+        public static double DoBenchmarkValueTuple(uint size)
+        {
+            return CTBenchmark.RunBenchmark(() => {
+                double cnt = 0;
+                cnt += GenerateHashSetValueTuple(size).Sum(x => x.Item2);
             });
         }
 
