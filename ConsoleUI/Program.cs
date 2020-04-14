@@ -21,7 +21,7 @@ namespace ConsoleUI
 {
     class Program
     {
-        private static uint CONTAINER_SIZE = 1000000;
+        private static uint CONTAINER_SIZE = 1_000_000;
 
         public delegate void Instruction();
         public delegate double Benchmark(uint size);
@@ -33,7 +33,8 @@ namespace ConsoleUI
         private static readonly Dictionary<byte, Tuple <string, Instruction>> _MainMenu = new Dictionary<byte, Tuple <string, Instruction>>
         {
             {0x00, new Tuple<string, Instruction>("Exit", () => {shouldStop = true;})},
-            {0x01, new Tuple<string, Instruction>("HashSet", () => {CurrentMenu = _HashsetMenu;})}
+            {0x01, new Tuple<string, Instruction>("HashSet", () => {CurrentMenu = _HashsetMenu;})},
+            {0x02, new Tuple<string, Instruction>("MinMax", () => {CurrentMenu = _MinMaxMenu;})}
         };
 
         private static readonly Dictionary<byte, Tuple <string, Instruction>> _HashsetMenu = new Dictionary<byte, Tuple <string, Instruction>>
@@ -43,6 +44,15 @@ namespace ConsoleUI
             {0x02, new Tuple<string, Instruction>("Hashset<ValueTuple>", () => {ReportResult("Hashset<ValueTuple>", CTBHashSet.DoBenchmarkValueTuple, CONTAINER_SIZE);})},
 
             {0x03, new Tuple<string, Instruction>("Run all async", () => Program.RunAllEntryesAsync(_HashsetMenu).GetAwaiter().GetResult())}
+        };
+
+        private static readonly Dictionary<byte, Tuple <string, Instruction>> _MinMaxMenu = new Dictionary<byte, Tuple <string, Instruction>>
+        {
+            {0x00, new Tuple<string, Instruction>("Back", () => {CurrentMenu = _MainMenu;})},
+            {0x01, new Tuple<string, Instruction>("Array Min Max with LINQ", () => {ReportResult("Array Min Max with LINQ", CTBMinMax.DoBenchmarkMinMaxLinq, CONTAINER_SIZE);})},
+            {0x02, new Tuple<string, Instruction>("Array Min Max manual", () => {ReportResult("Array Min Max manual", CTBMinMax.DoBenchmarkMinMaxManual, CONTAINER_SIZE);})},
+
+            {0x03, new Tuple<string, Instruction>("Run all async", () => Program.RunAllEntryesAsync(_MinMaxMenu).GetAwaiter().GetResult())}
         };
 
         static void ReportResult(in string testName, Benchmark test, uint containerSize)
