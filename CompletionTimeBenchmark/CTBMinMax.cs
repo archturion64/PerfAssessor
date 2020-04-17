@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Collections;
 using System.Linq;
+
 
 namespace CompletionTimeBenchmark
 {
     public class CTBMinMax
     {
-        private static Random rng = new Random();
 
         public static int[] GenerateArray(uint size)
         {
             int[] array =  new int [size];
+            var rng = new Random();
             for (int i = 0; i < array.Length; i++)
             {
                 array[i] = rng.Next(0, array.Length);
@@ -33,7 +33,6 @@ namespace CompletionTimeBenchmark
         {
             return CTBenchmark.RunBenchmark(() => {
                 IEnumerable<int> array = GenerateArray(size);
-
                 var iterator = array.GetEnumerator();
                 if (!iterator.MoveNext())
                 {
