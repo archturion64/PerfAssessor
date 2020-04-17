@@ -25,6 +25,7 @@ namespace CompletionTimeBenchmark
                 var array = GenerateArray(size);
                 var max = array.Max();
                 var min = array.Min();
+                Console.Write("{0} {1}", min, max);
             });
         }
 
@@ -46,6 +47,7 @@ namespace CompletionTimeBenchmark
                     max = Math.Max(max, iterator.Current);
                     min = Math.Min(min, iterator.Current);
                 }
+                Console.Write("{0} {1}", min, max);
             });
         }
 

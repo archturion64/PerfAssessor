@@ -37,6 +37,7 @@ namespace CompletionTimeBenchmark
             return CTBenchmark.RunBenchmark(() => {
                 double cnt = 0;
                 cnt += GenerateHashSetTuple(size).Sum(x => x.Item2);
+                Console.Write("{0}", cnt);
             });
         }
 
@@ -45,6 +46,7 @@ namespace CompletionTimeBenchmark
             return CTBenchmark.RunBenchmark(() => {
                 double cnt = 0;
                 cnt += GenerateHashSetValueTuple(size).Sum(x => x.Item2);
+                Console.Write("{0}", cnt);
             });
         }
 

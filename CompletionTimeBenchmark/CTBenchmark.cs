@@ -13,9 +13,9 @@ namespace CompletionTimeBenchmark
             for (int i = 0; i < TEST_ITEARTIONS; i++)
             {
                 results[i] = STBStopWatch.MeasureInMs(workload);
-                Console.Write(" . ");
+                Console.Write(" | ");
             }
-            Console.WriteLine("]");
+            Console.WriteLine(" | ]");
             return results.Average();
         }
     }
