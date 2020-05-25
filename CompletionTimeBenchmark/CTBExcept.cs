@@ -12,7 +12,7 @@ namespace CompletionTimeBenchmark
             var rng = new Random();
             while (retVal.Count < size)
             {
-                retVal.Add($"MiddleClk_{(rng.Next(0, (int)size*1000)).ToString()}");
+                retVal.Add($"MiddleClk_{(rng.Next(0, (int)size)).ToString()}");
             }
             return retVal;
         }
@@ -20,7 +20,7 @@ namespace CompletionTimeBenchmark
         public static T GenerateSortedCollection<T>(uint size) where T: ICollection<string>, new()
         {
             var retVal =  new T();
-            for (int i = 0; i< size; i++)
+            for (int i = 0; i < size; i++)
             {
                 retVal.Add($"MiddleClk_{i.ToString()}");
             }
