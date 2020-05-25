@@ -58,7 +58,9 @@ namespace ConsoleUI
             {0x00, new Tuple<string, Instruction>("Back", () => {CurrentMenu = _MainMenu;})},
             {0x01, new Tuple<string, Instruction>("Except String List with LINQ", () => {ReportResult("Except String List with LINQ", CTBExcept.DoBenchmarkStringListUnsortedLinq, CONTAINER_SIZE);})},
             {0x02, new Tuple<string, Instruction>("Except Sorted String List with LINQ", () => {ReportResult("Except Sorted String List with LINQ", CTBExcept.DoBenchmarkStringListSortedLinq, CONTAINER_SIZE);})},
-            {0x03, new Tuple<string, Instruction>("Run all async", () => Program.RunAllEntryesAsync(_UnSortedMenu).GetAwaiter().GetResult())}
+            {0x03, new Tuple<string, Instruction>("Except String HashSet with LINQ", () => {ReportResult("Except String HashSet with LINQ", CTBExcept.DoBenchmarkStringHashSetLinq, CONTAINER_SIZE);})},
+            
+            {0x04, new Tuple<string, Instruction>("Run all async", () => Program.RunAllEntryesAsync(_UnSortedMenu).GetAwaiter().GetResult())}
         };
 
 
