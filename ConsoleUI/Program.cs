@@ -31,7 +31,8 @@ namespace ConsoleUI
         {
             {0x00, new Tuple<string, Instruction>("Exit", () => {shouldStop = true;})},
             {0x01, new Tuple<string, Instruction>("HashSet", () => {CurrentMenu = _HashsetMenu;})},
-            {0x02, new Tuple<string, Instruction>("MinMax", () => {CurrentMenu = _MinMaxMenu;})}
+            {0x02, new Tuple<string, Instruction>("MinMax", () => {CurrentMenu = _MinMaxMenu;})},
+            {0x03, new Tuple<string, Instruction>("UnSorted", () => {CurrentMenu = _UnSortedMenu;})}    
         };
 
         private static readonly Dictionary<byte, Tuple <string, Instruction>> _HashsetMenu = new Dictionary<byte, Tuple <string, Instruction>>
@@ -51,6 +52,15 @@ namespace ConsoleUI
 
             {0x03, new Tuple<string, Instruction>("Run all async", () => Program.RunAllEntryesAsync(_MinMaxMenu).GetAwaiter().GetResult())}
         };
+
+        private static readonly Dictionary<byte, Tuple <string, Instruction>> _UnSortedMenu = new Dictionary<byte, Tuple <string, Instruction>>
+        {
+            {0x00, new Tuple<string, Instruction>("Back", () => {CurrentMenu = _MainMenu;})},
+            {0x01, new Tuple<string, Instruction>("Except String List with LINQ", () => {ReportResult("Except String List with LINQ", CTBExcept.DoBenchmarkStringListUnsortedLinq, CONTAINER_SIZE);})},
+            {0x02, new Tuple<string, Instruction>("Except String Set with LINQ", () => {ReportResult("Except String Set with LINQ", CTBExcept.DoBenchmarkStringListSortedLinq, CONTAINER_SIZE);})},
+            {0x03, new Tuple<string, Instruction>("Run all async", () => Program.RunAllEntryesAsync(_UnSortedMenu).GetAwaiter().GetResult())}
+        };
+
 
         static void ReportResult(in string testName, Benchmark test, uint containerSize)
         {
